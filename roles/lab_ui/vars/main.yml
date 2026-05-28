@@ -24,7 +24,7 @@ shortcuts:
       Exec=bruno %U
       Terminal=false
       Type=Application
-      Icon=${SNAP}/meta/gui/icon.png
+      Icon=/snap/bruno/current/meta/gui/icon.png
       StartupWMClass=Bruno
       MimeType=x-scheme-handler/bruno;
       Comment=Opensource API Client for Exploring and Testing APIs
