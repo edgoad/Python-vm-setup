@@ -1,0 +1,78 @@
+---
+
+# Install packages via apt
+- name: Install core system and packaging prerequisites
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - gnupg
+      - lsb-release
+      - software-properties-common
+    state: latest
+    update_cache: yes
+- name: Install base command-line utilities
+  apt:
+    name:
+      - curl
+      - wget
+      - git
+      - vim
+      - mc
+      - htop
+      - neofetch
+    state: latest
+- name: Install Python and automation tooling
+  apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+    state: latest
+- name: Install desktop and GNOME support packages
+  apt:
+    name:
+      - dbus-x11
+      - dconf-cli
+      - snapd
+      - snapd-xdg-open
+    state: latest
+- name: Install networking and security tools
+  apt:
+    name:
+      - ftp
+      - net-tools
+      - inetutils-traceroute
+      - tcptrace
+      - tcptraceroute
+      - tcpdump
+      - telnet
+      - sshpass
+      - stunnel4
+    state: latest
+- name: Install virtualization integration tools
+  apt:
+    name:
+      - open-vm-tools
+      - open-vm-tools-desktop
+      - vmfs-tools
+    state: latest
+- name: Install system services and utilities
+  apt:
+    name:
+      - openssh-server
+    state: latest
+
+- name: Update ubuntu packages [please wait]
+  apt:
+    name: "*"
+    state: latest
+    cache_valid_time: 3600
+    update_cache: yes
+
+# Install packages via snap
+- name: Install bruno snap package
+  become: yes
+  snap:
+    name: bruno
+    state: present

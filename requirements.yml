@@ -1,0 +1,13 @@
+---
+# requirements.yml
+# External Ansible roles pulled from shared repositories
+
+
+collections:
+  - name: https://github.com/edgoad/ansible-common-roles.git
+    type: git
+    #version: v1.0.0
+
+
+roles:
+  # External Galaxy roles

@@ -1,0 +1,9 @@
+---
+hostname: ubuntu
+current_user: "{{ existing_user }}"
+user_pass: "{{ existing_user_pass }}"
+ansible_become_password: "{{ existing_user_pass }}"
+user_home: "/home/{{ existing_user }}"
+desktop_path: "{{ user_home }}/Desktop"
+vscode_install_method: snap        # snap | apt
+vscode_update_policy: pinned       # pinned | latest

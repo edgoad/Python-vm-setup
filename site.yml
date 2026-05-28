@@ -1,0 +1,45 @@
+---
+- name: Configure DEVASC VM
+  hosts: localhost
+  connection: local
+  become: true
+
+  vars_prompt:
+    - name: existing_user
+      prompt: "Enter your existing username"
+      private: no
+      default: "student"
+    - name: existing_user_pass
+      prompt: "Enter your existing password"
+      default: "Password01"
+
+  vars_files:
+    - group_vars/all.yml
+  roles:
+    - role: packages
+      tags: packages
+    # ---- Common (shared) roles ----
+    - role: edgoad.common.hostname
+      tags: hostname
+    - role: edgoad.common.power_management
+      tags: power_management
+
+    # Users must exist before user-scoped tools
+    - role: users
+      tags: users
+
+    # Developer tooling
+    - role: edgoad.common.vscode
+      tags: vscode
+    
+    # Services
+    - role: edgoad.common.xrdp
+      tags: xrdp
+
+    # ---- Lab-specific roles ----
+    
+    - role: edgoad.common.desktop_shortcuts
+      tags: desktop_shortcuts
+    - role: lab_ui
+      tags: lab_ui
+    
