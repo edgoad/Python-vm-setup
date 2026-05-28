@@ -1,0 +1,31 @@
+---
+desktop_path: "{{ user_home }}/Desktop"
+shortcuts:
+  - name: terminal.desktop
+    content: |
+      [Desktop Entry]
+      Name=Terminal
+      Exec=gnome-terminal
+      Icon=utilities-terminal
+      Type=Application
+      Terminal=false
+  - name: vscode.desktop
+    content: |
+      [Desktop Entry]
+      Name=Visual Studio Code
+      Exec=/snap/bin/code
+      Icon=/snap/code/current/meta/gui/vscode.png
+      Type=Application
+      Terminal=false
+  - name: bruno.desktop
+    content: |
+      [Desktop Entry]
+      Name=Bruno
+      Exec=bruno %U
+      Terminal=false
+      Type=Application
+      Icon=${SNAP}/meta/gui/icon.png
+      StartupWMClass=Bruno
+      MimeType=x-scheme-handler/bruno;
+      Comment=Opensource API Client for Exploring and Testing APIs
+      Categories=Development;
