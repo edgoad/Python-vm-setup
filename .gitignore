@@ -1,0 +1,27 @@
+# Ansible runtime artifacts
+*.retry
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+
+# Editor / IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Molecule / test artifacts (if you add testing later)
+.molecule/
+.cache/
