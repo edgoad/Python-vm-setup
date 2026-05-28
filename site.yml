@@ -1,5 +1,5 @@
 ---
-- name: Configure DEVASC VM
+- name: Configure Python VM
   hosts: localhost
   connection: local
   become: true
