@@ -11,7 +11,7 @@
       - software-properties-common
     state: latest
     update_cache: yes
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install base command-line utilities
   apt:
     name:
@@ -23,7 +23,7 @@
       - htop
       - fastfetch
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install Python and automation tooling
   apt:
     name:
@@ -31,7 +31,7 @@
       - python3-pip
       - python3-venv
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install desktop and GNOME support packages
   apt:
     name:
@@ -39,7 +39,7 @@
       - dconf-cli
       - snapd
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install networking and security tools
   apt:
     name:
@@ -53,7 +53,7 @@
       - sshpass
       - stunnel4
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install virtualization integration tools
   apt:
     name:
@@ -63,13 +63,13 @@
       - qemu-utils
       - libguestfs-tools
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 - name: Install system services and utilities
   apt:
     name:
       - openssh-server
     state: latest
-  ignore_errors: yes
+  ignore_errors: no
 
 - name: Update ubuntu packages [please wait]
   apt:
@@ -77,7 +77,7 @@
     state: latest
     cache_valid_time: 3600
     update_cache: yes
-  ignore_errors: yes
+  ignore_errors: no
 
 # Install packages via snap
 - name: Install bruno snap package
