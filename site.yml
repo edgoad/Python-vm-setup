@@ -23,6 +23,8 @@
       tags: hostname
     - role: edgoad.common.power_management
       tags: power_management
+    - role: edgoad.common.boot
+      tags: boot
 
     # Users must exist before user-scoped tools
     - role: users
