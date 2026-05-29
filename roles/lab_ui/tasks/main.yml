@@ -7,8 +7,8 @@
   changed_when: false
 
 - name: Update favorite apps in GNOME
-  command: gsettings set org.gnome.shell favorite-apps "['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Terminal.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']"
+  command: gsettings set org.gnome.shell favorite-apps "['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Ptyxis.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']"
   become: true
   become_user: "{{ existing_user }}"
-  when: "current_favorite_apps.stdout != \"['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Terminal.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']\""
+  when: "current_favorite_apps.stdout != \"['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Ptyxis.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']\""
 

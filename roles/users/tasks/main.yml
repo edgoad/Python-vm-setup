@@ -2,10 +2,11 @@
 - name: Ensure devasc can sudo without password
   copy:
     dest: "/etc/sudoers.d/{{ existing_user }}"
-    content: "{{ existing_user }} ALL=(ALL) NOPASSWD:ALL"
+    content: "{{ existing_user }} ALL=(ALL) NOPASSWD:ALL\n"
     owner: root
     group: root
     mode: '0440'
+    validate: 'visudo -cf %s'
 
 - name: Ensure Desktop folder exists
   file:

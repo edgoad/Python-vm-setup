@@ -5,8 +5,8 @@ shortcuts:
     content: |
       [Desktop Entry]
       Name=Terminal
-      Exec=gnome-terminal
-      Icon=utilities-terminal
+      Exec=ptyxis
+      Icon=org.gnome.Ptyxis
       Type=Application
       Terminal=false
   - name: vscode.desktop
