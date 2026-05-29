@@ -21,7 +21,7 @@
       - vim
       - mc
       - htop
-      - neofetch
+      - fastfetch
     state: latest
   ignore_errors: yes
 - name: Install Python and automation tooling
@@ -38,7 +38,6 @@
       - dbus-x11
       - dconf-cli
       - snapd
-      - snapd-xdg-open
     state: latest
   ignore_errors: yes
 - name: Install networking and security tools
@@ -47,7 +46,7 @@
       - ftp
       - net-tools
       - inetutils-traceroute
-      - tcptrace
+      - tshark
       - tcptraceroute
       - tcpdump
       - telnet
@@ -58,9 +57,11 @@
 - name: Install virtualization integration tools
   apt:
     name:
-      - open-vm-tools
-      - open-vm-tools-desktop
-      - vmfs-tools
+      - linux-virtual
+      - linux-cloud-tools-virtual
+      - linux-tools-virtual
+      - qemu-utils
+      - libguestfs-tools
     state: latest
   ignore_errors: yes
 - name: Install system services and utilities
