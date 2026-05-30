@@ -1,6 +1,39 @@
 ---
 desktop_path: "{{ user_home }}/Desktop"
-shortcuts:
+
+# Shortcuts for Ubuntu 24 or older (uses gnome-terminal)
+shortcuts_ubuntu_24_or_older:
+  - name: terminal.desktop
+    content: |
+      [Desktop Entry]
+      Name=Terminal
+      Exec=gnome-terminal
+      Icon=utilities-terminal
+      Type=Application
+      Terminal=false
+  - name: vscode.desktop
+    content: |
+      [Desktop Entry]
+      Name=Visual Studio Code
+      Exec=/snap/bin/code
+      Icon=/snap/code/current/meta/gui/vscode.png
+      Type=Application
+      Terminal=false
+  - name: bruno.desktop
+    content: |
+      [Desktop Entry]
+      Name=Bruno
+      Exec=bruno %U
+      Terminal=false
+      Type=Application
+      Icon=/snap/bruno/current/meta/gui/icon.png
+      StartupWMClass=Bruno
+      MimeType=x-scheme-handler/bruno;
+      Comment=Opensource API Client for Exploring and Testing APIs
+      Categories=Development;
+
+# Shortcuts for Ubuntu 25+ (uses ptyxis)
+shortcuts_ubuntu_25_and_newer:
   - name: terminal.desktop
     content: |
       [Desktop Entry]
@@ -30,11 +63,14 @@ shortcuts:
       Comment=Opensource API Client for Exploring and Testing APIs
       Categories=Development;
 
+# Dynamically select shortcuts based on Ubuntu version
+shortcuts: "{{ shortcuts_ubuntu_24_or_older if ubuntu_24_or_older else shortcuts_ubuntu_25_and_newer }}"
+
 # Desktop favorites configuration: choose one of 'gnome', 'xfce', 'mate'
 #favorite_desktop_env: gnome
 
 # Lists of favorite apps per desktop environment (desktop file names)
-favorites_gnome:
+favorites_gnome_24_or_older:
   - firefox_firefox.desktop
   - code_code.desktop
   - org.gnome.Ptyxis.desktop
@@ -42,6 +78,16 @@ favorites_gnome:
   - org.gnome.Nautilus.desktop
   - snap-store_ubuntu-software.desktop
   - yelp.desktop
+favorites_gnome_25_and_newer:
+  - firefox_firefox.desktop
+  - code_code.desktop
+  - org.gnome.Ptyxis.desktop
+  - bruno_bruno.desktop
+  - org.gnome.Nautilus.desktop
+  - snap-store_ubuntu-software.desktop
+  - yelp.desktop
+
+favorites_gnome: "{{ favorites_gnome_24_or_older if ubuntu_24_or_older else favorites_gnome_25_and_newer }}"
 
 favorites_xfce:
   - firefox.desktop

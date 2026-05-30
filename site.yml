@@ -6,19 +6,23 @@
   pre_tasks:
     - name: Gather facts
       setup:
+      tags: always
 
     - name: Determine Ubuntu major version
       set_fact:
         ubuntu_major_version: "{{ ansible_distribution_major_version | default('0') | int }}"
+      tags: always
 
     - name: Set defaults based on Ubuntu version
       set_fact:
         default_desktop_env: "{{ 'gnome' if (ubuntu_major_version | int) <= 24 else 'xfce' }}"
         ubuntu_24_or_older: "{{ (ubuntu_major_version | int) <= 24 }}"
+      tags: always
 
     - name: Ensure `favorite_desktop_env` uses default when not provided
       set_fact:
         favorite_desktop_env: "{{ favorite_desktop_env | default(default_desktop_env) }}"
+      tags: always
 
   vars_prompt:
     - name: existing_user
