@@ -73,7 +73,7 @@ shortcuts: "{{ shortcuts_ubuntu_24_or_older if ubuntu_24_or_older else shortcuts
 favorites_gnome_24_or_older:
   - firefox_firefox.desktop
   - code_code.desktop
-  - org.gnome.Ptyxis.desktop
+  - org.gnome.Terminal.desktop
   - bruno_bruno.desktop
   - org.gnome.Nautilus.desktop
   - snap-store_ubuntu-software.desktop

@@ -15,7 +15,7 @@
       become_user: "{{ existing_user }}"
       vars:
         gnome_favorite_apps: "['{{ favorites_gnome | join(\"', '\") }}']"
-      command: "gsettings set org.gnome.shell favorite-apps {{ gnome_favorite_apps }}"
+      command: "gsettings set org.gnome.shell favorite-apps \"{{ gnome_favorite_apps }}\""
       when: current_favorite_apps.stdout != gnome_favorite_apps
   when: favorite_desktop_env == 'gnome'
 
