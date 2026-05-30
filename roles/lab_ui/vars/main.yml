@@ -29,3 +29,34 @@ shortcuts:
       MimeType=x-scheme-handler/bruno;
       Comment=Opensource API Client for Exploring and Testing APIs
       Categories=Development;
+
+# Desktop favorites configuration: choose one of 'gnome', 'xfce', 'mate'
+favorite_desktop_env: gnome
+
+# Lists of favorite apps per desktop environment (desktop file names)
+favorites_gnome:
+  - firefox_firefox.desktop
+  - code_code.desktop
+  - org.gnome.Ptyxis.desktop
+  - bruno_bruno.desktop
+  - org.gnome.Nautilus.desktop
+  - snap-store_ubuntu-software.desktop
+  - yelp.desktop
+
+favorites_xfce:
+  - firefox.desktop
+  - code.desktop
+  - org.gnome.Ptyxis.desktop
+  - bruno.desktop
+  - org.gnome.Nautilus.desktop
+  - snap-store_ubuntu-software.desktop
+  - yelp.desktop
+
+favorites_mate:
+  - firefox.desktop
+  - code.desktop
+  - org.gnome.Ptyxis.desktop
+  - bruno.desktop
+  - org.gnome.Nautilus.desktop
+  - snap-store_ubuntu-software.desktop
+  - yelp.desktop

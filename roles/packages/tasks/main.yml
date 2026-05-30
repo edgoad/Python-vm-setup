@@ -12,6 +12,12 @@
     state: latest
     update_cache: yes
   ignore_errors: no
+
+- name: Set package names based on Ubuntu major version
+  set_fact:
+    visual_pkg: "{{ 'fastfetch' if (ansible_distribution_major_version | default(0) | int) >= 26 else 'neofetch' }}"
+    net_pkg: "{{ 'tshark' if (ansible_distribution_major_version | default(0) | int) >= 26 else 'tcptrace' }}"
+
 - name: Install base command-line utilities
   apt:
     name:
@@ -21,7 +27,7 @@
       - vim
       - mc
       - htop
-      - fastfetch
+      - "{{ visual_pkg }}"
     state: latest
   ignore_errors: no
 - name: Install Python and automation tooling
@@ -46,7 +52,7 @@
       - ftp
       - net-tools
       - inetutils-traceroute
-      - tshark
+      - "{{ net_pkg }}"
       - tcptraceroute
       - tcpdump
       - telnet

@@ -3,6 +3,22 @@
   hosts: localhost
   connection: local
   become: true
+  pre_tasks:
+    - name: Gather facts
+      setup:
+
+    - name: Determine Ubuntu major version
+      set_fact:
+        ubuntu_major_version: "{{ ansible_distribution_major_version | default('0') | int }}"
+
+    - name: Set defaults based on Ubuntu version
+      set_fact:
+        default_desktop_env: "{{ 'gnome' if ubuntu_major_version <= 24 else 'xfce' }}"
+        ubuntu_24_or_older: "{{ ubuntu_major_version <= 24 }}"
+
+    - name: Ensure `favorite_desktop_env` uses default when not provided
+      set_fact:
+        favorite_desktop_env: "{{ favorite_desktop_env | default(default_desktop_env) }}"
 
   vars_prompt:
     - name: existing_user

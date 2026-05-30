@@ -1,14 +1,81 @@
 ---
-- name: Check current favorite apps in GNOME
-  become: true
-  become_user: "{{ existing_user }}"
-  shell: gsettings get org.gnome.shell favorite-apps
-  register: current_favorite_apps
-  changed_when: false
+# Set favorites according to selected desktop environment
 
-- name: Update favorite apps in GNOME
-  command: gsettings set org.gnome.shell favorite-apps "['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Ptyxis.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']"
-  become: true
-  become_user: "{{ existing_user }}"
-  when: "current_favorite_apps.stdout != \"['firefox_firefox.desktop', 'code_code.desktop', 'org.gnome.Ptyxis.desktop', 'bruno_bruno.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_ubuntu-software.desktop', 'yelp.desktop']\""
+- name: Configure GNOME favorite apps
+  block:
+    - name: Check current favorite apps in GNOME
+      become: true
+      become_user: "{{ existing_user }}"
+      shell: gsettings get org.gnome.shell favorite-apps
+      register: current_favorite_apps
+      changed_when: false
+
+    - name: Update favorite apps in GNOME
+      become: true
+      become_user: "{{ existing_user }}"
+      command: >-
+        gsettings set org.gnome.shell favorite-apps "['{{ favorites_gnome | join("', '") }}']"
+      when: current_favorite_apps.stdout != "['{{ favorites_gnome | join("', '") }}']"
+  when: favorite_desktop_env == 'gnome'
+
+
+- name: Configure XFCE favorite apps via launcher file
+  block:
+    - name: Ensure XFCE panel config directory exists
+      become: true
+      file:
+        path: "{{ user_home }}/.config/xfce4/panel"
+        state: directory
+        owner: "{{ existing_user }}"
+        mode: '0755'
+
+    - name: Write XFCE launcher favorites file
+      become: true
+      copy:
+        dest: "{{ user_home }}/.config/xfce4/panel/launcher-favorites.rc"
+        owner: "{{ existing_user }}"
+        mode: '0644'
+        content: |
+          [Launcher]
+          Items={{ favorites_xfce | map('regex_replace', '^(.*)$', 'application://\\1') | join(';') }}
+
+    - name: Restart XFCE panel to pick up new launchers
+      become: true
+      become_user: "{{ existing_user }}"
+      command: xfce4-panel -r
+  when: favorite_desktop_env == 'xfce'
+
+
+- name: Configure MATE favorite apps via launcher file
+  block:
+    - name: Ensure MATE panel config directory exists
+      become: true
+      file:
+        path: "{{ user_home }}/.config/mate/panel"
+        state: directory
+        owner: "{{ existing_user }}"
+        mode: '0755'
+
+    - name: Write MATE launcher favorites file
+      become: true
+      copy:
+        dest: "{{ user_home }}/.config/mate/panel/launcher-favorites.rc"
+        owner: "{{ existing_user }}"
+        mode: '0644'
+        content: |
+          [Launcher]
+          Items={{ favorites_mate | map('regex_replace', '^(.*)$', 'application://\\1') | join(';') }}
+
+    - name: Restart MATE panel to pick up new launchers
+      become: true
+      become_user: "{{ existing_user }}"
+      shell: nohup mate-panel --replace >/dev/null 2>&1 &
+  when: favorite_desktop_env == 'mate'
+
+
+- name: Log if selected desktop environment is not supported
+  debug:
+    msg: "favorite_desktop_env '{{ favorite_desktop_env }}' is not one of: gnome, xfce, mate. No favorites configured."
+  when: favorite_desktop_env not in ['gnome', 'xfce', 'mate']
+
 
