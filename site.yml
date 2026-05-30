@@ -13,8 +13,8 @@
 
     - name: Set defaults based on Ubuntu version
       set_fact:
-        default_desktop_env: "{{ 'gnome' if ubuntu_major_version <= 24 else 'xfce' }}"
-        ubuntu_24_or_older: "{{ ubuntu_major_version <= 24 }}"
+        default_desktop_env: "{{ 'gnome' if (ubuntu_major_version | int) <= 24 else 'xfce' }}"
+        ubuntu_24_or_older: "{{ (ubuntu_major_version | int) <= 24 }}"
 
     - name: Ensure `favorite_desktop_env` uses default when not provided
       set_fact:
