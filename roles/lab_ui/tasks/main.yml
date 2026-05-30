@@ -13,9 +13,10 @@
     - name: Update favorite apps in GNOME
       become: true
       become_user: "{{ existing_user }}"
-      command: >-
-        gsettings set org.gnome.shell favorite-apps "['{{ favorites_gnome | join("', '") }}']"
-      when: current_favorite_apps.stdout != "['{{ favorites_gnome | join("', '") }}']"
+      vars:
+        gnome_favorite_apps: "['{{ favorites_gnome | join(\"', '\") }}']"
+      command: "gsettings set org.gnome.shell favorite-apps {{ gnome_favorite_apps }}"
+      when: current_favorite_apps.stdout != gnome_favorite_apps
   when: favorite_desktop_env == 'gnome'
 
 
