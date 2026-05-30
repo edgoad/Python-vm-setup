@@ -31,7 +31,7 @@ shortcuts:
       Categories=Development;
 
 # Desktop favorites configuration: choose one of 'gnome', 'xfce', 'mate'
-favorite_desktop_env: gnome
+#favorite_desktop_env: gnome
 
 # Lists of favorite apps per desktop environment (desktop file names)
 favorites_gnome:
